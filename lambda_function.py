@@ -71,7 +71,15 @@ def lambda_handler(event, context):
             s3.Object(BUCKET_NAME, f"{uid}.txt").put(Body=story_content)
 
         # 
-
+        dynamodb = boto3.client('dynamodb')
+            dynamodb.put_item(
+                TableName=TABLE_NAME,
+                Item={
+                    'title': {'S': title},
+                    'uid': {'S': uid},
+                    'bucket': {'S': BUCKET_NAME}
+                }
+            )
         # Return a success response with message
             return {
                 'statusCode': 200,
