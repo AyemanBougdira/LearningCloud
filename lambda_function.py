@@ -72,7 +72,7 @@ def lambda_handler(event, context):
 
         # 
             dynamodb = boto3.client('dynamodb')
-                dynamodb.put_item(
+            dynamodb.put_item(
                     TableName=TABLE_NAME,
                     Item={
                         'title': {'S': title},
